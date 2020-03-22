@@ -32,7 +32,7 @@ client.on('disconnect', message => {
 
 client.on('message', message => {
   if (config.READING_CHANNELS.includes(message.channel.id)) {
-    let content = message.cleanContent;
+    let content = message.content;
     message.attachments.forEach(attachment => {
       content += '\n' + attachment.proxyURL;
     });
