@@ -38,7 +38,7 @@ client.on('message', message => {
     });
 
     config.WRITING_CHANNELS.forEach(channel => {
-      client.channels.get(channel).send(content).catch(err => {
+      client.channels.get(channel).send(content, {embed: message.embeds[0]}).catch(err => {
         console.error(err);
       });
     });
@@ -49,6 +49,7 @@ client.on('message', message => {
         method: 'POST',
         json: {
           content: content,
+          embeds: message.embeds,
         },
       }, err => {
         if (err) {
