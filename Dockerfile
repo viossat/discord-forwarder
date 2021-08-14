@@ -1,12 +1,10 @@
-FROM node:12-alpine
+FROM node:16.6.2-alpine3.14
 
-WORKDIR /usr/src/app
+RUN apk add --no-cache git && \
+    git clone https://github.com/viossat/discord-forwarder
+    
+WORKDIR discord-forwarder
 
-COPY package.json yarn.lock ./
+RUN npm install
 
-RUN yarn install --production
-
-COPY . ./
-
-ENTRYPOINT ["node"]
-CMD ["index"]
+CMD ["node", "index.js"]
